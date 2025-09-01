@@ -2,122 +2,375 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Adi Takhar — Portfolio</title>
+  <title>About Me — Adi Takhar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Adi Takhar — high school maker who loves robotics, 3D printing, and coding." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       color-scheme: light dark;
+      --bg: #0b1020;
+      --bg-soft: #0f162b;
+      --text: #e6e8ef;
+      --muted: #a7b0c0;
+      --card: #121a33;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #0ea5e9; /* cyan-500 */
+      --accent-2: #22c55e; /* green-500 */
+      --link: #7dd3fc;
+      --shadow: 0 10px 30px rgba(2, 8, 23, 0.45);
+      --ring: rgba(14,165,233,0.35);
+      --grad-1: rgba(14,165,233,0.65);
+      --grad-2: rgba(34,197,94,0.65);
+      --grad-3: rgba(124,58,237,0.55);
     }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f8fb;
+        --bg-soft: #f0f4f9;
+        --text: #0f172a;
+        --muted: #465169;
+        --card: #ffffff;
+        --border: rgba(2, 8, 23, 0.08);
+        --link: #0369a1;
+        --shadow: 0 8px 24px rgba(2, 8, 23, 0.08);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      margin: 40px auto;
-      max-width: 680px;
-      background: #f6f8fa;
-      color: #22223b;
-      border-radius: 18px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
-      padding: 32px;
-      line-height: 1.6;
+      margin: 0;
+      min-height: 100dvh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,0.18), transparent 60%),
+                  radial-gradient(1000px 500px at 120% 10%, rgba(34,197,94,0.14), transparent 60%),
+                  var(--bg);
+      color: var(--text);
     }
-    h1 { color: #007acc; margin-top: 0; }
-    a { color: #1d70b8; word-break: break-word; }
-    ul { padding-left: 1.2rem; }
-    /* Project styling */
-    .project { margin: 10px 0 14px; }
-    .project strong { display: inline-block; margin-bottom: 2px; }
-    .project p { margin: 4px 0 8px; color: #444; }
-    .project a { font-weight: 600; }
-    /* Small-screen tweaks */
-    @media (max-width: 480px) {
-      body { margin: 20px auto; padding: 20px; border-radius: 14px; }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
     }
-    .socials a {
-      display: inline-block;
-      margin: 0 10px 0 0;
-      text-decoration: none;
-      color: #43436b;
-      font-size: 18px;
+
+    /* Subtle animated background orbs */
+    .backdrop { position: fixed; inset: -20% -10% auto -10%; pointer-events: none; z-index: 0; }
+    .orb {
+      position: absolute; filter: blur(40px); opacity: 0.35;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(closest-side, var(--grad-1), transparent 70%);
+      animation: float 14s ease-in-out infinite;
     }
-    .socials a:focus,
-    .socials a:hover { text-decoration: underline; }
-    footer { margin-top: 24px; font-size: 0.95rem; color: #444; }
+    .orb.g2 { left: 70%; top: 10%; width: 420px; height: 420px; background: radial-gradient(closest-side, var(--grad-2), transparent 70%); animation-duration: 18s; }
+    .orb.g3 { left: 10%; top: 40%; width: 260px; height: 260px; background: radial-gradient(closest-side, var(--grad-3), transparent 70%); animation-duration: 22s; }
+    @keyframes float { 0%,100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(16px) translateX(-10px); } }
+
+    /* Header */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background:
+        linear-gradient(var(--card), var(--card)) padding-box,
+        linear-gradient(140deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      position: sticky; top: 12px; z-index: 2;
+    }
+
+    .id { display: flex; align-items: center; gap: 14px; }
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center;
+      color: #0b1020; font-weight: 700;
+      background: conic-gradient(from 140deg, var(--accent), var(--accent-2));
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.8);
+    }
+    .site-header h1 { font-size: 1.4rem; line-height: 1.2; margin: 0; }
+    .name-gradient { background: linear-gradient(90deg, #7dd3fc, #86efac 60%, #c4b5fd);
+                     -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .tagline { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .theme-toggle:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
+
+    .nav { display: none; gap: 10px; align-items: center; }
+    .nav a { text-decoration: none; color: var(--muted); border: 1px solid var(--border); padding: 6px 10px; border-radius: 10px; }
+    .nav a:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+    @media (min-width: 720px) { .nav { display: flex; } }
+
+    /* Sections */
+    section { margin-top: 28px; position: relative; z-index: 1; animation: fadeSlide 0.6s ease both; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    h2 { font-size: 1.2rem; margin: 0 0 14px; letter-spacing: 0.2px; position: relative; display: inline-block; }
+    h2::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px; }
+    p { line-height: 1.7; }
+
+    .card {
+      background:
+        linear-gradient(var(--card), var(--card)) padding-box,
+        linear-gradient(135deg, rgba(125,211,252,0.25), rgba(134,239,172,0.2)) border-box;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Project cards */
+    .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .cards li { display: flex; }
+    .project {
+      display: grid; gap: 8px; flex: 1;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+    .project:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,165,233,0.18); }
+    .project h3 { margin: 0; font-size: 1rem; }
+    .project .desc { color: var(--muted); font-size: 0.95rem; }
+    .pill { display: inline-block; font-size: 0.75rem; color: var(--muted); border: 1px solid var(--border);
+            padding: 2px 8px; border-radius: 999px; }
+    .actions { display: flex; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: 600; font-size: 0.9rem;
+      background: var(--accent);
+      color: #05131a; text-decoration: none;
+      padding: 8px 12px; border-radius: 10px;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 6px 20px rgba(14,165,233,0.25);
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .btn.secondary { background: transparent; color: var(--link); border-color: var(--border); box-shadow: none; }
+
+    /* Contact */
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .link-chip { border: 1px solid var(--border); color: var(--link); text-decoration: none; padding: 8px 12px; border-radius: 12px; }
+    .socials a { color: var(--muted); margin-right: 12px; text-decoration: none; }
+    .socials a:hover, .links a:hover { text-decoration: underline; }
+
+    footer { margin-top: 28px; color: var(--muted); text-align: center; font-size: 0.95rem; }
+
+    /* Hero */
+    .hero { margin-top: 24px; display: grid; gap: 10px; padding: 18px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 6px rgba(14,165,233,0.15); }
+    .headline { font-size: clamp(1.6rem, 2.6vw + 1rem, 2.2rem); line-height: 1.2; margin: 0; }
+    .sub { color: var(--muted); margin: 0; }
+
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); padding: 8px 12px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); }
+    .chip .emoji { font-size: 1rem; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Adi Takhar</h1>
-  </header>
-
-  <main>
-    <section aria-labelledby="about-heading">
-      <h2 id="about-heading">About Me</h2>
-      <p>
-        Hi! I’m <strong>Adi Takhar</strong>, a high school student who enjoys robotics, 3D printing, and tinkering.
-        I love making things and I’m currently working on an <strong>OpenCV-based automated sentry turret</strong>.
-      </p>
-    </section>
-
-    <section aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Select Projects</h2>
-      <ul>
-        <li class="project">
-          <strong>ESP32-based Parking Assistant — Jul '25</strong>
-          <p>An ESP32-powered garage parking distance helper with simple indicators.</p>
-          <a href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">github.com/Adad650/garageSensor</a>
-        </li>
-        <li class="project">
-          <strong>Gaming Website (AI-assisted) — Aug '25</strong>
-          <p>A lightweight site hosting simple browser games and experiments.</p>
-          <a href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">github.com/Adad650/gamingHTML</a>
-        </li>
-        <li class="project">
-          <strong>Arduino-based Alarm Clock — Jun '25</strong>
-          <p>An Arduino clock with basic alarms and display/buzzer control.</p>
-          <a href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">github.com/Adad650/alarmClock</a>
-        </li>
-        <li class="project">
-          <strong>ISS Live Location (API) — Jul '25</strong>
-          <p>Fetches the ISS position from a public API and shows live updates.</p>
-          <a href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">github.com/Adad650/issLiveLocation</a>
-        </li>
-        <li class="project">
-          <strong>Fun but Useless (C/C++) — Jun '25</strong>
-          <p>A collection of small C/C++ experiments, games, and learning snippets.</p>
-          <a href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">github.com/Adad650/funButUseless</a>
-        </li>
-        <li class="project">
-          <strong>Hangman / Wordle — May '25</strong>
-          <p>A word-guessing game inspired by Hangman and Wordle, built for practice.</p>
-          <a href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">github.com/Adad650/Hangman</a>
-        </li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact Me</h2>
-      <p>
-        <a href="mailto:ezioadfek@gmail.com" aria-label="Email Adi">ezioadfek@gmail.com</a>
-      </p>
-    </section>
-
-    <section aria-labelledby="links-heading">
-      <h2 id="links-heading">Links</h2>
-      <div class="socials" aria-label="Profiles and links">
-        <a href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
-        <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld">MakerWorld</a>
-        <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on Printables">Printables</a>
+  <div class="backdrop" aria-hidden="true">
+    <div class="orb g1" style="left: -4%; top: -6%;"></div>
+    <div class="orb g2"></div>
+    <div class="orb g3"></div>
+  </div>
+  <div class="wrap">
+    <header class="site-header card">
+      <div class="id">
+        <div class="avatar" aria-hidden="true">AT</div>
+        <div>
+          <h1 class="name-gradient">Adi Takhar</h1>
+          <p class="tagline">High school maker — robotics, 3D printing, code.</p>
+        </div>
       </div>
-    </section>
-  </main>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about-heading">About</a>
+        <a href="#projects-heading">Projects</a>
+        <a href="#skills-heading">Skills</a>
+        <a href="#contact-heading">Contact</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">Toggle Theme</button>
+    </header>
 
-  <footer>
-    © <span id="year"></span> Adi Takhar
-  </footer>
+    <main>
+      <section class="hero card" aria-label="Intro">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Student Maker</span>
+        <h2 class="headline">I build things that blink, move, and learn.</h2>
+        <p class="sub">From Arduino alarms to ESP32 sensors and OpenCV turrets — I love turning ideas into working prototypes.</p>
+      </section>
+
+      <section class="card" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
+        <p>
+          Hi! I’m <strong>Adi Takhar</strong>, a high school student who enjoys robotics, 3D printing, and tinkering.
+          I love making things and I’m currently working on an <strong>OpenCV-based automated sentry turret</strong>.
+        </p>
+      </section>
+
+      <section aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <ul class="cards">
+          <li>
+            <article class="project card">
+              <header>
+                <h3>ESP32-based Parking Assistant</h3>
+                <span class="pill">July '25</span>
+              </header>
+              <p class="desc">Ultrasonic-guided garage parking with distance feedback on LEDs.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">
+                  View Project
+                </a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card">
+              <header>
+                <h3>Gaming Website (AI-assisted)</h3>
+                <span class="pill">Aug '25</span>
+              </header>
+              <p class="desc">A fun web playground featuring classic games and UI polish.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card">
+              <header>
+                <h3>Arduino-based Alarm Clock</h3>
+                <span class="pill">June '25</span>
+              </header>
+              <p class="desc">DIY alarm with buzzer, time display, and snooze button.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card">
+              <header>
+                <h3>ISS Live Location via API</h3>
+                <span class="pill">July '25</span>
+              </header>
+              <p class="desc">Fetches and displays the ISS position using a public API.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card">
+              <header>
+                <h3>Fun but Useless (C/C++)</h3>
+                <span class="pill">June '25</span>
+              </header>
+              <p class="desc">Silly experiments in C/C++ — because not everything needs a purpose.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card">
+              <header>
+                <h3>Hangman / Wordle</h3>
+                <span class="pill">May '25</span>
+              </header>
+              <p class="desc">Word guessing games built with simple, clean JavaScript.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills</h2>
+        <div class="skills" role="list">
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🐍</span> Python</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🔧</span> Arduino</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">📶</span> ESP32</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🧠</span> OpenCV</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🖨️</span> 3D Printing</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">📐</span> Fusion 360</span>
+          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">⚙️</span> C/C++</span>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact</h2>
+        <div class="links" aria-label="Primary links">
+          <a class="link-chip" href="mailto:ezioadfek@gmail.com" aria-label="Email Adi">Email</a>
+          <a class="link-chip" href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
+        </div>
+        <div class="socials" style="margin-top:10px;" aria-label="Social links">
+          <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld">MakerWorld</a>
+          <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on Printables">Printables</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Adi Takhar • Built with Flask
+    </footer>
+  </div>
 
   <script>
-    // Keep the year current automatically
+    // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle with localStorage
+    const toggle = document.getElementById('themeToggle');
+    const KEY = 'theme-preference';
+    const root = document.documentElement;
+
+    const getPref = () => localStorage.getItem(KEY);
+    const setPref = (val) => localStorage.setItem(KEY, val);
+    const applyTheme = (mode) => {
+      if (mode === 'light') {
+        root.style.colorScheme = 'light';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9');
+      } else if (mode === 'dark') {
+        root.style.colorScheme = 'dark';
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9');
+      } else {
+        root.style.colorScheme = '';
+      }
+    };
+
+    const saved = getPref();
+    if (saved) applyTheme(saved);
+
+    toggle?.addEventListener('click', () => {
+      const cur = getPref();
+      const next = cur === 'dark' ? 'light' : 'dark';
+      setPref(next);
+      applyTheme(next);
+    });
   </script>
 </body>
 </html>
