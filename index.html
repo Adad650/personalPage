@@ -1,89 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About Me</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>About Me — Adi Takhar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Adi Takhar — high school maker who loves robotics, 3D printing, and coding." />
   <style>
+    :root {
+      color-scheme: light dark;
+    }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       margin: 40px auto;
-      max-width: 600px;
+      max-width: 680px;
       background: #f6f8fa;
       color: #22223b;
       border-radius: 18px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.10);
       padding: 32px;
+      line-height: 1.6;
     }
-    h1 { color: #007acc; }
-    a { color: #1d70b8; word-break: break-all; }
+    h1 { color: #007acc; margin-top: 0; }
+    a { color: #1d70b8; word-break: break-word; }
+    ul { padding-left: 1.2rem; }
     .socials a {
       display: inline-block;
-      margin: 0 6px 0 0;
+      margin: 0 10px 0 0;
       text-decoration: none;
       color: #43436b;
-      font-size: 22px;
+      font-size: 18px;
     }
+    .socials a:focus,
+    .socials a:hover { text-decoration: underline; }
+    footer { margin-top: 24px; font-size: 0.95rem; color: #444; }
   </style>
 </head>
 <body>
-  <!-- Fill in your info below! -->
-  <h1>YOUR NAME</h1>
-  <h2>About Me</h2>
-  <p>
-    Hi! I’m <strong>Adi Takhar</strong>, a high school student who enjoys robotics and tinkering. based in Canada.<br>
-    <!-- Add more about you here! -->
-    I love making things and am currently working on a openCV based automated sentry turret.
-  </p>
+  <header>
+    <h1>Adi Takhar</h1>
+  </header>
 
-  <h2>Projects</h2>
-  <ul>
-    <li>
-      <strong>ESP32-based parking assistant</strong>
-      <br>
-      <a href="https://github.com/Adad650/garageSensor">View Project</a>
-    </li>
-    <!-- Add more projects as needed -->
-    <li>
-      <strong>Gaming website(USED AI)</strong>
-      <br>
-      <a href="https://github.com/Adad650/gamingHTML">View Project</a>
-    </li>
-    <li>
-      <strong>Arduino-based Alarm Clock</strong>
-      <br>
-      <a href="https://github.com/Adad650/alarmClock">View Project</a>
-    </li>
-    <li>
-      <strong>ISS live location via API</strong>
-      <br>
-      <a href="https://github.com/Adad650/issLiveLocation">View Project</a>
-    </li>
-    <li>
-      <strong>Fun but useless projects written in c++(One of my first C/C++ projects)</strong>
-      <br>
-      <a href="https://github.com/Adad650/funButUseless">View Project</a>
-    </li>
-    <li>
-      <strong>Hangman/Wordle</strong>
-      <br>
-      <a href="https://github.com/Adad650/Hangman">View Project</a>
-    </li>
+  <main>
+    <section aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>
+        Hi! I’m <strong>Adi Takhar</strong>, a high school student who enjoys robotics, 3D printing, and tinkering.
+        I love making things and I’m currently working on an <strong>OpenCV-based automated sentry turret</strong>.
+      </p>
+    </section>
 
+    <section aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <ul>
+        <li>
+          <strong>ESP32-based Parking Assistant</strong><br />
+          <a href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">View Project</a>
+        </li>
+        <li>
+          <strong>Gaming Website (AI-assisted)</strong><br />
+          <a href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">View Project</a>
+        </li>
+        <li>
+          <strong>Arduino-based Alarm Clock</strong><br />
+          <a href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">View Project</a>
+        </li>
+        <li>
+          <strong>ISS Live Location via API</strong><br />
+          <a href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">View Project</a>
+        </li>
+        <li>
+          <strong>Fun but Useless (early C/C++ mini-projects)</strong><br />
+          <a href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">View Project</a>
+        </li>
+        <li>
+          <strong>Hangman / Wordle</strong><br />
+          <a href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">View Project</a>
+        </li>
+      </ul>
+    </section>
 
+    <section aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <p>
+        <a href="mailto:adi.takhar@gmail.com" aria-label="Email Adi">Email</a> |
+        <a href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
+      </p>
+      <div class="socials" aria-label="Social links">
+        <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld">MakerWorld</a>
+        <!-- Replace YOURHANDLE below with your LinkedIn handle if you want to show it -->
+        <a href="https://linkedin.com/in/YOURHANDLE" target="_blank" rel="noopener" aria-label="Adi on LinkedIn">LinkedIn</a>
+      </div>
+    </section>
+  </main>
 
-  </ul>
+  <footer>
+    © <span id="year"></span> Adi Takhar
+  </footer>
 
-  <h2>Contact</h2>
-  <p>
-    <a href="adi.takhar@gmail.com">Email</a> |
-    <a href="https://github.com/Adad650">GitHub</a>
-    <!-- Add more social links if you want -->
-  </p>
-  <div class="socials">
-    <a href="https://makerworld.com/en/@making_music" title="Makerworld"></a>
-    <a href="https://linkedin.com/in/YOURHANDLE" title="Printables"></a>
-    <!-- Add or remove socials as you like -->
-  </div>
+  <script>
+    // Keep the year current automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
