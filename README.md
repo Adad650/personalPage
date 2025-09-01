@@ -31,7 +31,7 @@ I love making things and I’m currently working on an **OpenCV-based automated 
 [Email](mailto:adi.takhar@gmail.com) • [GitHub](https://github.com/Adad650)
 
 ### Socials
-[MakerWorld](https://makerworld.com/en/@making_music) • [LinkedIn](https://linkedin.com/in/YOURHANDLE)
+[MakerWorld](https://makerworld.com/en/@making_music) • [Printables](https://www.printables.com/@makingmusic_2433269)
 
 ---
 
