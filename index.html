@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>About Me — Adi Takhar</title>
+  <title>Adi Takhar — Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Adi Takhar — high school maker who loves robotics, 3D printing, and coding." />
   <style>
@@ -23,6 +23,15 @@
     h1 { color: #007acc; margin-top: 0; }
     a { color: #1d70b8; word-break: break-word; }
     ul { padding-left: 1.2rem; }
+    /* Project styling */
+    .project { margin: 10px 0 14px; }
+    .project strong { display: inline-block; margin-bottom: 2px; }
+    .project p { margin: 4px 0 8px; color: #444; }
+    .project a { font-weight: 600; }
+    /* Small-screen tweaks */
+    @media (max-width: 480px) {
+      body { margin: 20px auto; padding: 20px; border-radius: 14px; }
+    }
     .socials a {
       display: inline-block;
       margin: 0 10px 0 0;
@@ -50,44 +59,54 @@
     </section>
 
     <section aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Projects</h2>
+      <h2 id="projects-heading">Select Projects</h2>
       <ul>
-        <li>
-          <strong>ESP32-based Parking Assistant(July '25)</strong><br />
-          <a href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>ESP32-based Parking Assistant — Jul '25</strong>
+          <p>An ESP32-powered garage parking distance helper with simple indicators.</p>
+          <a href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">github.com/Adad650/garageSensor</a>
         </li>
-        <li>
-          <strong>Gaming Website (AI-assisted) August '25</strong><br />
-          <a href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>Gaming Website (AI-assisted) — Aug '25</strong>
+          <p>A lightweight site hosting simple browser games and experiments.</p>
+          <a href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">github.com/Adad650/gamingHTML</a>
         </li>
-        <li>
-          <strong>Arduino-based Alarm Clock (June '25)</strong><br />
-          <a href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>Arduino-based Alarm Clock — Jun '25</strong>
+          <p>An Arduino clock with basic alarms and display/buzzer control.</p>
+          <a href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">github.com/Adad650/alarmClock</a>
         </li>
-        <li>
-          <strong>ISS Live Location via API (July '25)</strong><br />
-          <a href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>ISS Live Location (API) — Jul '25</strong>
+          <p>Fetches the ISS position from a public API and shows live updates.</p>
+          <a href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">github.com/Adad650/issLiveLocation</a>
         </li>
-        <li>
-          <strong>Fun but Useless (early C/C++ mini-projects) June '25</strong><br />
-          <a href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>Fun but Useless (C/C++) — Jun '25</strong>
+          <p>A collection of small C/C++ experiments, games, and learning snippets.</p>
+          <a href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">github.com/Adad650/funButUseless</a>
         </li>
-        <li>
-          <strong>Hangman / Wordle May '25</strong><br />
-          <a href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">View Project</a>
+        <li class="project">
+          <strong>Hangman / Wordle — May '25</strong>
+          <p>A word-guessing game inspired by Hangman and Wordle, built for practice.</p>
+          <a href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">github.com/Adad650/Hangman</a>
         </li>
       </ul>
     </section>
 
     <section aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact</h2>
+      <h2 id="contact-heading">Contact Me</h2>
       <p>
-        <a href="mailto:adi.takhar@gmail.com" aria-label="Email Adi">Email</a> |
-        <a href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
+        <a href="mailto:ezioadfek@gmail.com" aria-label="Email Adi">ezioadfek@gmail.com</a>
       </p>
-      <div class="socials" aria-label="Social links">
+    </section>
+
+    <section aria-labelledby="links-heading">
+      <h2 id="links-heading">Links</h2>
+      <div class="socials" aria-label="Profiles and links">
+        <a href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
         <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld">MakerWorld</a>
-        <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on printables">Printables</a>
+        <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on Printables">Printables</a>
       </div>
     </section>
   </main>
