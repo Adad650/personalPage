@@ -12,185 +12,155 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
+    :root{
       color-scheme: light dark;
-      --bg: #0b1020;
-      --bg-soft: #0f162b;
-      --text: #e6e8ef;
-      --muted: #a7b0c0;
-      --card: #121a33;
-      --border: rgba(255, 255, 255, 0.08);
-      --accent: #0ea5e9; /* cyan-500 */
-      --accent-2: #22c55e; /* green-500 */
-      --link: #7dd3fc;
-      --shadow: 0 10px 30px rgba(2, 8, 23, 0.45);
-      --ring: rgba(14,165,233,0.35);
-      --grad-1: rgba(14,165,233,0.65);
-      --grad-2: rgba(34,197,94,0.65);
-      --grad-3: rgba(124,58,237,0.55);
+      --bg:#0b1020; --bg-soft:#0f162b; --text:#e6e8ef; --muted:#a7b0c0;
+      --card:#121a33; --border:rgba(255,255,255,.08);
+      --accent:#0ea5e9; --accent-2:#22c55e; --link:#7dd3fc;
+      --shadow:0 10px 30px rgba(2,8,23,.45); --ring:rgba(14,165,233,.35);
+      --grad-1:rgba(14,165,233,.65); --grad-2:rgba(34,197,94,.65); --grad-3:rgba(124,58,237,.55);
+      /* dynamic mouse variables */
+      --mx:50vw; --my:50vh; --mxp:0.5; --myp:0.5;
     }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f6f8fb;
-        --bg-soft: #f0f4f9;
-        --text: #0f172a;
-        --muted: #465169;
-        --card: #ffffff;
-        --border: rgba(2, 8, 23, 0.08);
-        --link: #0369a1;
-        --shadow: 0 8px 24px rgba(2, 8, 23, 0.08);
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8fb; --bg-soft:#f0f4f9; --text:#0f172a; --muted:#465169;
+        --card:#ffffff; --border:rgba(2,8,23,.08); --link:#0369a1;
+        --shadow:0 8px 24px rgba(2,8,23,.08);
       }
     }
 
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100dvh;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,0.18), transparent 60%),
-                  radial-gradient(1000px 500px at 120% 10%, rgba(34,197,94,0.14), transparent 60%),
-                  var(--bg);
-      color: var(--text);
-    }
-
-    .wrap {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 32px 24px 48px;
-    }
-
-    /* Subtle animated background orbs */
-    .backdrop { position: fixed; inset: -20% -10% auto -10%; pointer-events: none; z-index: 0; }
-    .orb {
-      position: absolute; filter: blur(40px); opacity: 0.35;
-      width: 320px; height: 320px; border-radius: 50%;
-      background: radial-gradient(closest-side, var(--grad-1), transparent 70%);
-      animation: float 14s ease-in-out infinite;
-    }
-    .orb.g2 { left: 70%; top: 10%; width: 420px; height: 420px; background: radial-gradient(closest-side, var(--grad-2), transparent 70%); animation-duration: 18s; }
-    .orb.g3 { left: 10%; top: 40%; width: 260px; height: 260px; background: radial-gradient(closest-side, var(--grad-3), transparent 70%); animation-duration: 22s; }
-    @keyframes float { 0%,100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(16px) translateX(-10px); } }
-
-    /* Header */
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100dvh; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      color:var(--text);
       background:
-        linear-gradient(var(--card), var(--card)) padding-box,
-        linear-gradient(140deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
-      border: 1px solid transparent;
-      border-radius: 16px;
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      position: sticky; top: 12px; z-index: 2;
+        radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(1000px 500px at 120% 10%, rgba(34,197,94,.14), transparent 60%),
+        var(--bg);
+      position:relative; isolation:isolate;
     }
 
-    .id { display: flex; align-items: center; gap: 14px; }
-    .avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      display: grid; place-items: center;
-      color: #0b1020; font-weight: 700;
-      background: conic-gradient(from 140deg, var(--accent), var(--accent-2));
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.8);
+    /* animated film */
+    body::before{
+      content:""; position:fixed; inset:-20%;
+      background:conic-gradient(from 0deg at 50% 50%, rgba(14,165,233,.06), rgba(34,197,94,.06), rgba(124,58,237,.06), rgba(14,165,233,.06));
+      filter:blur(40px); animation:spin 24s linear infinite; z-index:-2;
     }
-    .site-header h1 { font-size: 1.4rem; line-height: 1.2; margin: 0; }
-    .name-gradient { background: linear-gradient(90deg, #7dd3fc, #86efac 60%, #c4b5fd);
-                     -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .tagline { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-    .theme-toggle {
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 8px 12px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-    .theme-toggle:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.18); }
-
-    .nav { display: none; gap: 10px; align-items: center; }
-    .nav a { text-decoration: none; color: var(--muted); border: 1px solid var(--border); padding: 6px 10px; border-radius: 10px; }
-    .nav a:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
-    @media (min-width: 720px) { .nav { display: flex; } }
-
-    /* Sections */
-    section { margin-top: 28px; position: relative; z-index: 1; animation: fadeSlide 0.6s ease both; }
-    @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    h2 { font-size: 1.2rem; margin: 0 0 14px; letter-spacing: 0.2px; position: relative; display: inline-block; }
-    h2::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px; }
-    p { line-height: 1.7; }
-
-    .card {
+    /* mouse spotlight */
+    .spotlight{
+      pointer-events:none; position:fixed; inset:0; z-index:-1;
       background:
-        linear-gradient(var(--card), var(--card)) padding-box,
-        linear-gradient(135deg, rgba(125,211,252,0.25), rgba(134,239,172,0.2)) border-box;
-      border: 1px solid transparent;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: var(--shadow);
+        radial-gradient(600px 400px at var(--mx) var(--my), color-mix(in oklab, var(--accent) 30%, transparent), transparent 60%),
+        radial-gradient(900px 600px at calc(100% - var(--mx)) calc(100% - var(--my)), color-mix(in oklab, var(--accent-2) 22%, transparent), transparent 70%);
+      transition:background 80ms linear;
     }
 
-    /* Project cards */
-    .cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .cards li { display: flex; }
-    .project {
-      display: grid; gap: 8px; flex: 1;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    .wrap{max-width:920px; margin:0 auto; padding:32px 24px 48px}
+
+    /* orbs */
+    .backdrop{position:fixed; inset:-20% -10% auto -10%; pointer-events:none; z-index:0}
+    .orb{position:absolute; filter:blur(40px); opacity:.35; width:320px; height:320px; border-radius:50%;
+      background:radial-gradient(closest-side, var(--grad-1), transparent 70%); animation:float 14s ease-in-out infinite}
+    .orb.g2{left:70%; top:10%; width:420px; height:420px; background:radial-gradient(closest-side, var(--grad-2), transparent 70%); animation-duration:18s}
+    .orb.g3{left:10%; top:40%; width:260px; height:260px; background:radial-gradient(closest-side, var(--grad-3), transparent 70%); animation-duration:22s}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(16px) translateX(-10px)}}
+
+    /* header */
+    .site-header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      background:linear-gradient(var(--card),var(--card)) padding-box,
+                 linear-gradient(140deg, rgba(255,255,255,.12), rgba(255,255,255,.04)) border-box;
+      border:1px solid transparent; border-radius:16px; padding:14px 16px;
+      box-shadow:var(--shadow); backdrop-filter:blur(8px);
+      position:sticky; top:12px; z-index:2; transform-style:preserve-3d;
     }
-    .project:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(14,165,233,0.18); }
-    .project h3 { margin: 0; font-size: 1rem; }
-    .project .desc { color: var(--muted); font-size: 0.95rem; }
-    .pill { display: inline-block; font-size: 0.75rem; color: var(--muted); border: 1px solid var(--border);
-            padding: 2px 8px; border-radius: 999px; }
-    .actions { display: flex; gap: 8px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-weight: 600; font-size: 0.9rem;
-      background: var(--accent);
-      color: #05131a; text-decoration: none;
-      padding: 8px 12px; border-radius: 10px;
-      border: 1px solid transparent;
-      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 6px 20px rgba(14,165,233,0.25);
+    .id{display:flex; align-items:center; gap:14px}
+    .avatar{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:#0b1020; font-weight:700;
+      background:conic-gradient(from 140deg, var(--accent), var(--accent-2));
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.8)}
+    .site-header h1{font-size:1.4rem; line-height:1.2; margin:0}
+    .name-gradient{background:linear-gradient(90deg,#7dd3fc,#86efac 60%,#c4b5fd); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:shine 6s ease-in-out infinite;}
+    @keyframes shine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .tagline{margin:4px 0 0; color:var(--muted); font-size:.95rem}
+
+    .theme-toggle{border:1px solid var(--border); background:var(--card); color:var(--text); border-radius:12px; padding:8px 12px; cursor:pointer; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;}
+    .theme-toggle:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.18); box-shadow:0 8px 26px rgba(14,165,233,.25)}
+
+    .nav{display:none; gap:10px; align-items:center}
+    .nav a{text-decoration:none; color:var(--muted); border:1px solid var(--border); padding:6px 10px; border-radius:10px; transition:transform .18s ease}
+    .nav a:hover{color:var(--text); border-color:rgba(255,255,255,.18); transform:translateY(-2px)}
+    @media (min-width:720px){.nav{display:flex}}
+
+    /* sections */
+    section{margin-top:28px; position:relative; z-index:1; animation:fadeSlide .6s ease both}
+    @keyframes fadeSlide{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+    h2{font-size:1.2rem; margin:0 0 14px; letter-spacing:.2px; position:relative; display:inline-block}
+    h2::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:2px}
+    p{line-height:1.7}
+
+    .card{
+      background:linear-gradient(var(--card),var(--card)) padding-box,
+                 linear-gradient(135deg, rgba(125,211,252,.25), rgba(134,239,172,.2)) border-box;
+      border:1px solid transparent; border-radius:16px; padding:16px; box-shadow:var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      transform-style:preserve-3d; will-change:transform, box-shadow;
     }
-    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
-    .btn.secondary { background: transparent; color: var(--link); border-color: var(--border); box-shadow: none; }
 
-    /* Contact */
-    .links { display: flex; flex-wrap: wrap; gap: 10px; }
-    .link-chip { border: 1px solid var(--border); color: var(--link); text-decoration: none; padding: 8px 12px; border-radius: 12px; }
-    .socials a { color: var(--muted); margin-right: 12px; text-decoration: none; }
-    .socials a:hover, .links a:hover { text-decoration: underline; }
+    /* project cards */
+    .cards{list-style:none; padding:0; margin:0; display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(260px,1fr))}
+    .cards li{display:flex}
+    .project{display:grid; gap:8px; flex:1}
+    .project:hover{box-shadow:0 18px 40px rgba(14,165,233,.22)}
+    .project h3{margin:0; font-size:1rem}
+    .project .desc{color:var(--muted); font-size:.95rem}
+    .pill{display:inline-block; font-size:.75rem; color:var(--muted); border:1px solid var(--border); padding:2px 8px; border-radius:999px}
+    .actions{display:flex; gap:8px; align-items:center}
 
-    footer { margin-top: 28px; color: var(--muted); text-align: center; font-size: 0.95rem; }
+    .btn{display:inline-flex; align-items:center; gap:6px; font-weight:600; font-size:.9rem; background:var(--accent); color:#05131a; text-decoration:none; padding:8px 12px; border-radius:10px; border:1px solid transparent; transition:transform .18s ease, filter .18s ease, box-shadow .18s ease; box-shadow:0 6px 20px rgba(14,165,233,.25); will-change:transform;}
+    .btn:hover{transform:translateY(-2px) scale(1.02); filter:brightness(1.05)}
+    .btn.secondary{background:transparent; color:var(--link); border-color:var(--border); box-shadow:none}
 
-    /* Hero */
-    .hero { margin-top: 24px; display: grid; gap: 10px; padding: 18px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
-    .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 6px rgba(14,165,233,0.15); }
-    .headline { font-size: clamp(1.6rem, 2.6vw + 1rem, 2.2rem); line-height: 1.2; margin: 0; }
-    .sub { color: var(--muted); margin: 0; }
+    /* hero */
+    .hero{margin-top:24px; display:grid; gap:10px; padding:18px; position:relative; overflow:hidden}
+    .hero::after{content:""; position:absolute; inset:-2px; border-radius:16px; background:radial-gradient(400px 220px at var(--mx) var(--my), rgba(14,165,233,.18), transparent 60%); pointer-events:none; transition:background 80ms linear;}
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:.8rem; color:var(--muted)}
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--accent); box-shadow:0 0 0 6px rgba(14,165,233,.15)}
+    .headline{font-size:clamp(1.6rem, 2.6vw + 1rem, 2.2rem); line-height:1.2; margin:0}
+    .sub{color:var(--muted); margin:0}
 
-    /* Skills */
-    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); padding: 8px 12px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); }
-    .chip .emoji { font-size: 1rem; }
+    /* WOW effects */
+    [data-mag]{position:relative; will-change:transform}
+    .tilt{transform-style:preserve-3d; perspective:800px}
+    .tilt:hover{transform:translateZ(0.001px)} /* trigger GPU */
+
+    /* custom cursor */
+    .cursor{pointer-events:none; position:fixed; left:0; top:0; width:28px; height:28px; border-radius:50%; border:2px solid color-mix(in oklab, var(--accent) 80%, transparent); transform:translate(-50%,-50%); opacity:.85; z-index:9999; transition:width .12s ease, height .12s ease, border-color .12s ease, opacity .2s ease; mix-blend-mode:exclusion;}
+    .cursor.-hot{width:42px; height:42px; border-color:color-mix(in oklab, var(--accent-2) 85%, transparent)}
+
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn, .chip, .project, .nav a, .theme-toggle{transition:none}
+      .spotlight, .hero::after{display:none}
+      .cursor{display:none}
+      body::before{animation:none}
+    }
   </style>
 </head>
 <body>
+  <!-- spotlight -->
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <!-- backdrop orbs -->
   <div class="backdrop" aria-hidden="true">
-    <div class="orb g1" style="left: -4%; top: -6%;"></div>
+    <div class="orb g1" style="left:-4%; top:-6%"></div>
     <div class="orb g2"></div>
     <div class="orb g3"></div>
   </div>
+
   <div class="wrap">
-    <header class="site-header card">
+    <header class="site-header card tilt" data-mag>
       <div class="id">
         <div class="avatar" aria-hidden="true">AT</div>
         <div>
@@ -199,22 +169,22 @@
         </div>
       </div>
       <nav class="nav" aria-label="Primary">
-        <a href="#about-heading">About</a>
-        <a href="#projects-heading">Projects</a>
-        <a href="#skills-heading">Skills</a>
-        <a href="#contact-heading">Contact</a>
+        <a href="#about-heading" data-mag>About</a>
+        <a href="#projects-heading" data-mag>Projects</a>
+        <a href="#skills-heading" data-mag>Skills</a>
+        <a href="#contact-heading" data-mag>Contact</a>
       </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">Toggle Theme</button>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" data-mag>Toggle Theme</button>
     </header>
 
     <main>
-      <section class="hero card" aria-label="Intro">
+      <section class="hero card tilt" aria-label="Intro" data-mag>
         <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Student Maker</span>
         <h2 class="headline">I build things that blink, move, and learn.</h2>
         <p class="sub">From Arduino alarms to ESP32 sensors and OpenCV turrets — I love turning ideas into working prototypes.</p>
       </section>
 
-      <section class="card" aria-labelledby="about-heading">
+      <section class="card tilt" aria-labelledby="about-heading" data-mag>
         <h2 id="about-heading">About Me</h2>
         <p>
           Hi! I’m <strong>Adi Takhar</strong>, a high school student who enjoys robotics, 3D printing, and tinkering.
@@ -224,153 +194,224 @@
 
       <section aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
+
+        <!-- Featured (from your uploaded HTMLs only) -->
         <ul class="cards">
           <li>
-            <article class="project card">
-              <header>
-                <h3>ESP32-based Parking Assistant</h3>
-                <span class="pill">July '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>discordBot-v1</h3><span class="pill">Featured</span></header>
+              <p class="desc">Discord bot that tells the current time.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/discordBot-v1" target="_blank" rel="noopener" data-mag>View on GitHub</a>
+                <span style="margin-left:auto;display:flex;gap:6px;align-items:center"><span class="pill">Python</span></span>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card tilt" data-mag>
+              <header><h3>Morse-Code-Keyboard-Translator</h3><span class="pill">Featured</span></header>
+              <p class="desc">Keyboard → Morse code translator for quick practice.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/Morse-Code-Keyboard-Translator" target="_blank" rel="noopener" data-mag>View on GitHub</a>
+                <span style="margin-left:auto;display:flex;gap:6px;align-items:center"><span class="pill">Python</span></span>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="project card tilt" data-mag>
+              <header><h3>studyBuddy</h3><span class="pill">Featured</span></header>
+              <p class="desc">Simple study helper/organizer to keep sessions on track.</p>
+              <div class="actions">
+                <a class="btn" href="https://github.com/Adad650/studyBuddy" target="_blank" rel="noopener" data-mag>View on GitHub</a>
+                <span style="margin-left:auto;display:flex;gap:6px;align-items:center"><span class="pill">Python</span></span>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <!-- Repos from the HTML you provided (static, no scraping) -->
+        <ul class="cards">
+          <li>
+            <article class="project card tilt" data-mag>
+              <header><h3>ESP32-based Parking Assistant</h3><span class="pill">July '25</span></header>
               <p class="desc">Ultrasonic-guided garage parking with distance feedback on LEDs.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener">
-                  View Project
-                </a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/garageSensor" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
+
           <li>
-            <article class="project card">
-              <header>
-                <h3>Gaming Website (AI-assisted)</h3>
-                <span class="pill">Aug '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>Gaming Website (AI-assisted)</h3><span class="pill">Aug '25</span></header>
               <p class="desc">A fun web playground featuring classic games and UI polish.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener">View Project</a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/gamingHTML" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
+
           <li>
-            <article class="project card">
-              <header>
-                <h3>Arduino-based Alarm Clock</h3>
-                <span class="pill">June '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>Arduino-based Alarm Clock</h3><span class="pill">June '25</span></header>
               <p class="desc">DIY alarm with buzzer, time display, and snooze button.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener">View Project</a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/alarmClock" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
+
           <li>
-            <article class="project card">
-              <header>
-                <h3>ISS Live Location via API</h3>
-                <span class="pill">July '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>ISS Live Location via API</h3><span class="pill">July '25</span></header>
               <p class="desc">Fetches and displays the ISS position using a public API.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener">View Project</a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/issLiveLocation" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
+
           <li>
-            <article class="project card">
-              <header>
-                <h3>Fun but Useless (C/C++)</h3>
-                <span class="pill">June '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>Fun but Useless (C/C++)</h3><span class="pill">June '25</span></header>
               <p class="desc">Silly experiments in C/C++ — because not everything needs a purpose.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener">View Project</a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/funButUseless" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
+
           <li>
-            <article class="project card">
-              <header>
-                <h3>Hangman / Wordle</h3>
-                <span class="pill">May '25</span>
-              </header>
+            <article class="project card tilt" data-mag>
+              <header><h3>Hangman / Wordle</h3><span class="pill">May '25</span></header>
               <p class="desc">Word guessing games built with simple, clean Python.</p>
               <div class="actions">
-                <a class="btn" href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener">View Project</a>
-                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://github.com/Adad650/Hangman" target="_blank" rel="noopener" data-mag>View Project</a>
+                <a class="btn secondary" href="https://github.com/Adad650" target="_blank" rel="noopener" data-mag>GitHub</a>
               </div>
             </article>
           </li>
         </ul>
       </section>
 
-      <section class="card" aria-labelledby="skills-heading">
+      <section class="card tilt" aria-labelledby="skills-heading" data-mag>
         <h2 id="skills-heading">Skills</h2>
         <div class="skills" role="list">
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🐍</span> Python</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🔧</span> Arduino</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">📶</span> ESP32</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🧠</span> OpenCV</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">🖨️</span> 3D Printing</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">📐</span> Fusion 360</span>
-          <span class="chip" role="listitem"><span class="emoji" aria-hidden="true">⚙️</span> C/C++</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">🐍</span> Python</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">🔧</span> Arduino</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">📶</span> ESP32</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">🧠</span> OpenCV</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">🖨️</span> 3D Printing</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">📐</span> Fusion 360</span>
+          <span class="chip" role="listitem" data-mag><span class="emoji" aria-hidden="true">⚙️</span> C/C++</span>
         </div>
       </section>
 
-      <section class="card" aria-labelledby="contact-heading">
+      <section class="card tilt" aria-labelledby="contact-heading" data-mag>
         <h2 id="contact-heading">Contact</h2>
         <div class="links" aria-label="Primary links">
-          <a class="link-chip" href="mailto:ezioadfek@gmail.com" aria-label="Email Adi">Email</a>
-          <a class="link-chip" href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub">GitHub</a>
+          <a class="link-chip" href="mailto:ezioadfek@gmail.com" aria-label="Email Adi" data-mag>Email</a>
+          <a class="link-chip" href="https://github.com/Adad650" target="_blank" rel="noopener" aria-label="Adi on GitHub" data-mag>GitHub</a>
         </div>
         <div class="socials" style="margin-top:10px;" aria-label="Social links">
-          <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld">MakerWorld</a>
-          <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on Printables">Printables</a>
+          <a href="https://makerworld.com/en/@making_music" target="_blank" rel="noopener" aria-label="Adi on MakerWorld" data-mag>MakerWorld</a>
+          <a href="https://www.printables.com/@makingmusic_2433269" target="_blank" rel="noopener" aria-label="Adi on Printables" data-mag>Printables</a>
         </div>
       </section>
     </main>
 
-    <footer>
-      © <span id="year"></span> Adi Takhar • Built with Flask
-    </footer>
+    <footer>© <span id="year"></span> Adi Takhar • Built with Flask</footer>
   </div>
 
-  <script>
-    // Current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- custom cursor ring -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-    // Theme toggle with localStorage
+  <script>
+    /* Year + Theme */
+    document.getElementById('year').textContent = new Date().getFullYear();
     const toggle = document.getElementById('themeToggle');
     const KEY = 'theme-preference';
     const root = document.documentElement;
-
     const getPref = () => localStorage.getItem(KEY);
-    const setPref = (val) => localStorage.setItem(KEY, val);
-    const applyTheme = (mode) => {
-      if (mode === 'light') {
-        root.style.colorScheme = 'light';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9');
-      } else if (mode === 'dark') {
-        root.style.colorScheme = 'dark';
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9');
-      } else {
-        root.style.colorScheme = '';
-      }
+    const setPref = (v) => localStorage.setItem(KEY, v);
+    const applyTheme = (m) => {
+      if (m === 'light') { root.style.colorScheme = 'light'; document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9'); }
+      else if (m === 'dark') { root.style.colorScheme = 'dark'; document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9'); }
+      else { root.style.colorScheme = ''; }
     };
+    const saved = getPref(); if (saved) applyTheme(saved);
+    toggle?.addEventListener('click', () => { const cur = getPref(); const next = cur === 'dark' ? 'light' : 'dark'; setPref(next); applyTheme(next); });
 
-    const saved = getPref();
-    if (saved) applyTheme(saved);
+    /* WOW engine (hover, tilt, spotlight, cursor) */
+    const cursor = document.getElementById('cursor');
+    let mx = innerWidth/2, my = innerHeight/2;
 
-    toggle?.addEventListener('click', () => {
-      const cur = getPref();
-      const next = cur === 'dark' ? 'light' : 'dark';
-      setPref(next);
-      applyTheme(next);
-    });
+    addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      root.style.setProperty('--mx', mx + 'px');
+      root.style.setProperty('--my', my + 'px');
+      root.style.setProperty('--mxp', (mx / innerWidth).toFixed(4));
+      root.style.setProperty('--myp', (my / innerHeight).toFixed(4));
+      if (cursor) cursor.style.transform = `translate(${mx - 0.5}px, ${my - 0.5}px) translate(-50%, -50%)`;
+    }, { passive: true });
+
+    function __initMag(scope = document){
+      const magItems = Array.from(scope.querySelectorAll('[data-mag]'));
+      const strength = 18, tiltMax = 9, damp = 0.18;
+      const lerp = (a,b,t)=>a+(b-a)*t;
+
+      magItems.forEach(el => {
+        if (el.__magInit) return; el.__magInit = true;
+        let tx = 0, ty = 0, rx = 0, ry = 0;
+        const isTilt = el.classList.contains('tilt');
+
+        (function frame(){
+          el.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)` + (isTilt ? ` rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)` : '');
+          requestAnimationFrame(frame);
+        })();
+
+        function onMove(){
+          const r = el.getBoundingClientRect();
+          const cx = r.left + r.width/2, cy = r.top + r.height/2;
+          const nx = Math.max(-1, Math.min(1, (mx - cx) / (r.width/2)));
+          const ny = Math.max(-1, Math.min(1, (my - cy) / (r.height/2)));
+          tx = lerp(tx, nx * strength, damp);
+          ty = lerp(ty, ny * strength, damp);
+          if (isTilt){ rx = lerp(rx, (-ny) * tiltMax, damp); ry = lerp(ry, (nx) * tiltMax, damp); }
+        }
+        function onEnter(){ cursor?.classList.add('-hot'); el.style.boxShadow = '0 18px 40px rgba(14,165,233,.28)'; }
+        function onLeave(){
+          cursor?.classList.remove('-hot'); el.style.boxShadow = '';
+          const relax = () => { tx = lerp(tx, 0, .2); ty = lerp(ty, 0, .2); rx = lerp(rx, 0, .2); ry = lerp(ry, 0, .2);
+            if (Math.abs(tx)>.1 || Math.abs(ty)>.1 || Math.abs(rx)>.1 || Math.abs(ry)>.1) requestAnimationFrame(relax);
+          }; relax();
+        }
+        el.addEventListener('mouseenter', onEnter);
+        el.addEventListener('mousemove', onMove);
+        el.addEventListener('mouseleave', onLeave);
+        el.addEventListener('focusin', () => cursor?.classList.add('-hot'));
+        el.addEventListener('focusout', () => cursor?.classList.remove('-hot'));
+      });
+    }
+
+    __initMag(document);
+
+    const orbs = document.querySelectorAll('.orb');
+    addEventListener('mousemove', () => {
+      const px = (mx / innerWidth - 0.5) * 2, py = (my / innerHeight - 0.5) * 2;
+      orbs.forEach((o, i) => { const depth = (i+1) * 6; o.style.transform = `translate(${px * depth}px, ${py * depth}px)`; });
+    }, { passive:true });
+
+    function updateCursorVisibility(){
+      const touch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (cursor) cursor.style.display = touch ? 'none' : 'block';
+    }
+    updateCursorVisibility(); addEventListener('resize', updateCursorVisibility);
   </script>
 </body>
 </html>
